@@ -47,7 +47,7 @@ local function log(msg, msg_level)
 		t.writeToFile(msg, logfile, "a")
 	end
 	if msg_level == 0 then
-		error()
+		error("fatal log message")
 	end
 end
 
@@ -296,7 +296,7 @@ local function main()
 	-- Go to the first mining position.
 	for i=1,space do
 		t.dig()
-		t.forward()
+		forward()
 	end
 
 	t.saveCurrentPos("quarry")
@@ -310,7 +310,6 @@ local function main()
 		end
 
 		if iShouldReturnHome() then
-			inventory = getInvMap()
 			dropOff()
 		end
 
@@ -318,8 +317,7 @@ local function main()
 		if main < quarrySize then
 			t.gotoPos("quarry")
 			t.goto(t.x + 1, t.y, t.z, t.orientation)
-		else
-			t.gotoPos("home")
+			t.saveCurrentPos("quarry") -- new quarry location
 		end
 	end
 	t.gotoPos("home")

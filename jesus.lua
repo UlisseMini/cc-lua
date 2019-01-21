@@ -339,10 +339,10 @@ print("I started with "..tostring(startFuel).." fuel")
 print("I ended with "..tostring(turtle.getFuelLevel()).." fuel")
 
 -- Cleanup
-fs.delete("safety")
-fs.delete("startup")
-fs.move("oldstartup", "startup")
+pcall( function() fs.delete("safety") end)
+pcall( function() fs.delete("startup") end)
+pcall( function() fs.move("oldstartup", "startup") end)
 
 -- We're done, we don't need them
-fs.delete("coords")
-fs.delete("savedPositions")
+pcall( function() fs.delete("coords") end)
+pcall( function() fs.delete("savedPositions") end)
